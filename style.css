@@ -42,7 +42,7 @@ body div.table #cardtable {
 }
 
 body div.table #cardtable thead tr {
-  background-color: #04bb04;
+  background-color: #83e6fc;
 }
 
 body div.table #cardtable thead tr th {
@@ -70,11 +70,11 @@ body div.table #cardtable tbody tr td button {
 }
 
 body div.table #cardtable tbody tr:nth-child(2n) {
-  background-color: #04bb04;
+  background-color: #00df8a;
 }
 
 body div.table #cardtable tbody tr:nth-child(2n-1) {
-  background-color: #83e6fc;
+  background-color: #05a733;
 }
 
 body div.banner {
