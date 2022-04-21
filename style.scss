@@ -1,0 +1,73 @@
+body{
+    div.titleButton{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        div.listTitle{
+            font-size: 3rem;
+            color:rgb(4, 187, 4);
+            flex-direction: row;
+            // margin: 0 auto;
+        }
+        div.button{
+            padding-right: 50px;
+            position: absolute;
+            right: 0%;
+            button{
+                color: white;
+                background-color: brown;
+                width: 80px;
+                height: 40px;
+                font-size: 20px;
+            }
+        }
+
+    }
+    div.table{
+        padding: 0 50px;
+        #cardtable{
+            border-color: black;
+            thead{
+                tr{
+                    background-color: rgb(4, 187, 4);
+                    th{
+                        border-width: 1px;
+                        padding: 5px;
+                        font-size: 20px;
+                    }
+                }
+            }
+            tbody{
+                tr:hover {
+                    background-color: rgb(255, 220, 155) !important;
+                  }
+                td:hover {
+                    background-color: orange !important;
+                }
+                tr{
+                    td{
+                        border-width: 1px;
+                        padding: 5px;
+                        button{
+                            color: white;
+                            background-color: brown;
+                        }                
+                    }
+                }
+                tr:nth-child(2n){
+                    background-color: rgb(4, 187, 4);
+                }
+                tr:nth-child(2n-1){
+                    background-color: rgb(131, 230, 252);
+                }    
+            }
+        }
+    }
+    div.banner{
+        background-image:url(./banner13-pc.svg);
+        height: 35rem;
+        background-repeat: no-repeat;
+        background-position:center ;
+    }
+}

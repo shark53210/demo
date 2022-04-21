@@ -1,0 +1,86 @@
+body div.titleButton {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+body div.titleButton div.listTitle {
+  font-size: 3rem;
+  color: #04bb04;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+body div.titleButton div.button {
+  padding-right: 50px;
+  position: absolute;
+  right: 0%;
+}
+
+body div.titleButton div.button button {
+  color: white;
+  background-color: brown;
+  width: 80px;
+  height: 40px;
+  font-size: 20px;
+}
+
+body div.table {
+  padding: 0 50px;
+}
+
+body div.table #cardtable {
+  border-color: black;
+}
+
+body div.table #cardtable thead tr {
+  background-color: #04bb04;
+}
+
+body div.table #cardtable thead tr th {
+  border-width: 1px;
+  padding: 5px;
+  font-size: 20px;
+}
+
+body div.table #cardtable tbody tr:hover {
+  background-color: #ffdc9b !important;
+}
+
+body div.table #cardtable tbody td:hover {
+  background-color: orange !important;
+}
+
+body div.table #cardtable tbody tr td {
+  border-width: 1px;
+  padding: 5px;
+}
+
+body div.table #cardtable tbody tr td button {
+  color: white;
+  background-color: brown;
+}
+
+body div.table #cardtable tbody tr:nth-child(2n) {
+  background-color: #04bb04;
+}
+
+body div.table #cardtable tbody tr:nth-child(2n-1) {
+  background-color: #83e6fc;
+}
+
+body div.banner {
+  background-image: url(./banner13-pc.svg);
+  height: 35rem;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+/*# sourceMappingURL=style.css.map */
