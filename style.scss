@@ -15,11 +15,11 @@ body{
             position: absolute;
             right: 0%;
             button{
-                color: white;
-                background-color: brown;
+                background-color: #FFB319;
                 width: 80px;
                 height: 40px;
                 font-size: 20px;
+                border-radius: 10px;
             }
         }
 
@@ -50,8 +50,9 @@ body{
                         border-width: 1px;
                         padding: 5px;
                         button{
-                            color: white;
-                            background-color: brown;
+                            background-color: #FFB319;
+                            border-radius: 10px;
+
                         }                
                     }
                 }

@@ -26,11 +26,11 @@ body div.titleButton div.button {
 }
 
 body div.titleButton div.button button {
-  color: white;
-  background-color: brown;
+  background-color: #FFB319;
   width: 80px;
   height: 40px;
   font-size: 20px;
+  border-radius: 10px;
 }
 
 body div.table {
@@ -65,8 +65,8 @@ body div.table #cardtable tbody tr td {
 }
 
 body div.table #cardtable tbody tr td button {
-  color: white;
-  background-color: brown;
+  background-color: #FFB319;
+  border-radius: 10px;
 }
 
 body div.table #cardtable tbody tr:nth-child(2n) {
