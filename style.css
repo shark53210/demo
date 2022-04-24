@@ -37,43 +37,43 @@ body div.table {
   padding: 0 50px;
 }
 
-body div.table #cardtable {
+body div.table table.table {
   border-color: black;
 }
 
-body div.table #cardtable thead tr {
+body div.table table.table thead tr {
   background-color: #83e6fc;
 }
 
-body div.table #cardtable thead tr th {
+body div.table table.table thead tr th {
   border-width: 1px;
   padding: 5px;
   font-size: 20px;
 }
 
-body div.table #cardtable tbody tr:hover {
+body div.table table.table tbody tr:hover {
   background-color: #ffdc9b !important;
 }
 
-body div.table #cardtable tbody td:hover {
+body div.table table.table tbody td:hover {
   background-color: orange !important;
 }
 
-body div.table #cardtable tbody tr td {
+body div.table table.table tbody tr td {
   border-width: 1px;
   padding: 5px;
 }
 
-body div.table #cardtable tbody tr td button {
+body div.table table.table tbody tr td button {
   background-color: #FFB319;
   border-radius: 10px;
 }
 
-body div.table #cardtable tbody tr:nth-child(2n) {
+body div.table table.table tbody tr:nth-child(2n) {
   background-color: #00df8a;
 }
 
-body div.table #cardtable tbody tr:nth-child(2n-1) {
+body div.table table.table tbody tr:nth-child(2n-1) {
   background-color: #05a733;
 }
 
