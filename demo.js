@@ -44,7 +44,6 @@ $(document).ready(function () {
                         ajaxobj.phone = phone;
                         ajaxobj.email = email;
                         ajaxobj.add(ajaxobj);
-    
                         e.preventDefault(); // avoid to execute the actual submit of the form.
 
                     }
@@ -161,7 +160,6 @@ function refreshTable(data) {
 
     });
 }
-
 //點擊手機彈窗
 function tdclick (){
     // console.log("object");
