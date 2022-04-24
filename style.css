@@ -58,6 +58,10 @@ body div.table table.table tbody td:hover {
   background-color: orange !important;
 }
 
+body div.table table.table tbody tr td#clickPhone {
+  cursor: pointer;
+}
+
 body div.table table.table tbody tr td {
   border-width: 1px;
   padding: 5px;

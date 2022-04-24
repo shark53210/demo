@@ -4,8 +4,8 @@ $(document).ready(function () {
     var ajaxobj = new AjaxObject(url, 'json');
     ajaxobj.getall();
     // 新增按鈕
-    $("#addbutton").click(function () {
-        $("#dialog-addconfirm").dialog({
+    $("#addbutton").on("click",function () {
+        $("#dialog-addconfirm").fadeIn(3000).dialog({
             resizable: true,
             height: $(window).height() * 0.4, // dialog視窗度
             width: $(window).width() * 0.4,
@@ -55,8 +55,8 @@ $(document).ready(function () {
                     $(this).dialog("close");
                 }
             }
-        });
-    })
+        })
+    });
     // 搜尋按鈕
     $("#searchbutton").click(function () {
         $("#dialog-searchconfirm").dialog({
@@ -95,23 +95,40 @@ $(document).ready(function () {
         });
     })
     // 修改鈕
-    $("#cardtable").on('click', '.modifybutton', function (e) {
+    $("#cardtable").on('click', function (e) {
+        if(e.target.nodeName !== "BUTTON")return;
         var ajaxobj = new AjaxObject(url, 'json');
-        ajaxobj.modify_get();
-        
+        var getTr = e.target.closest("tr");
+        if(e.target.classList.contains("modifybutton")){
+            ajaxobj.modify_get(getTr);
+        }else{
+            $("#checkDel").on('click', function () {
+                getTr.remove();
+            })   
+        }
+
+        //console.log(e.target.closest("tr"));
+        // console.log(getTr);
     })
-    $("#checkDel").on('click', function () {
-        var deleteid = $(this).attr('id');
-        var url = "ajax/ajaxCard";
-        var ajaxobj = new AjaxObject(url, 'json');
-        ajaxobj.id = deleteid;
-        ajaxobj.delete();
+    // const elemCardTable = document.querySelector("#cardtable");
+    // elemCardTable.addEventListener("click",function(e){
+    //     console.log(e.target.closest("tr"));
+    // },true)
+    //彈窗確認checkDel
+    // $("#checkDel").on('click', function (e) {
+    //     //var deleteid = $(this).attr('id');
+    //     var deleteid = $("#deletebutton35")
+    //     var url = "ajax/ajaxCard";
+    //     var ajaxobj = new AjaxObject(url, 'json');
+    //     ajaxobj.id = deleteid;
+    //     ajaxobj.delete();
+        // console.log(e.target.closest("tr"));
         // $("#exampleModal").remove();
         // $(".modal-backdrop").remove();
         // $("#exampleModal").hide().attr("style", "display:none");
         // $(".modal-backdrop").hide().attr("style", "display:none");
 
-    })
+    //})
 
     // 自適應視窗
     $(window).resize(function () {
@@ -140,13 +157,13 @@ function refreshTable(data) {
                     <td data-bs-toggle='tooltip' title=[${strsex}](${item.cnname}){${item.enname}} >${item.cnname}</td>
                     <td>${item.enname}</td>
                     <td>${strsex}</td>
-                    <td><button id="modifybutton${item.s_sn||"35"}" class="modifybutton" style="font-size:16px;font-weight:bold;" >修改 <span class="glyphicon glyphicon-list-alt"></span></button></td>
-                    <td><button id="deletebutton${item.s_sn||"35"}" class="deletebutton" style="font-size:16px;font-weight:bold;" data-bs-toggle="modal" data-bs-target="#exampleModal">刪除 <span class="glyphicon glyphicon-trash"></span></button></td>
+                    <td><button id="modifybutton${item.s_sn||"35"}" class="modifybutton" type="button" style="font-size:16px;font-weight:bold;" >修改 <span class="glyphicon glyphicon-list-alt"></span></button></td>
+                    <td><button id="deletebutton${item.s_sn||"35"}" class="deletebutton" type="button" style="font-size:16px;font-weight:bold;" data-bs-toggle="modal" data-bs-target="#exampleModal">刪除 <span class="glyphicon glyphicon-trash"></span></button></td>
                     <td id="clickPhone" onclick="tdclick();" data-bs-toggle='popover' title=${item.phone.substring(0,4)}-${item.phone.substring(4,7)}-${item.phone.substring(7,10)} >${item.phone}</td>
                     <td>${item.email}</td>
                 </tr>
             `;
-        // var row = $("<tr></tr>");
+        // var row = $("<tr></tr>");data-bs-toggle="modal" data-bs-target="#exampleModal"
         // row.append($(`<td data-bs-toggle='tooltip' title=[${strsex}](${item.cnname}){${item.enname}} ></td>`).html(item.cnname));
         // row.append($("<td></td>").html(item.enname));
         // row.append($("<td></td>").html(strsex));
@@ -167,16 +184,22 @@ function tdclick (){
 }
 
 function initEdit(response) {
+    console.log(response[0]);
     var modifyid = $("#cardtable").attr('id').substring(12);
-    $("#mocnname").val(response[0].cnname);
-    $("#moenname").val(response[0].enname);
-    if (response[0].sex == 0) {
+    // $("#mocnname").val(response[0].cnname);
+    // $("#moenname").val(response[0].enname);
+    $("#mocnname").val(response[0].innerHTML);
+    $("#moenname").val(response[1].innerHTML);
+
+    if (response[2].innerHTML.sex == 0) {
         $("#modifyman").prop("checked", true);
         $("#modifywoman").prop("checked", false);
     } else {
         $("#modifyman").prop("checked", false);
         $("#modifywoman").prop("checked", true);
     }
+    $("#mophone").val(response[5].innerHTML);
+    $("#moemail").val(response[6].innerHTML);
     $("#modifysid").val(modifyid);
     $("#dialog-modifyconfirm").dialog({
         resizable: true,
@@ -191,12 +214,16 @@ function initEdit(response) {
                 var cnname = $("#mocnname").val();
                 var enname = $("#moenname").val();
                 var sex = $('input:radio:checked[name="mosex"]').val();
+                var phone = $("#mophone").val();
+                var email = $("#moemail").val();
                 var ajaxobj = new AjaxObject(url, 'json');
                 ajaxobj.cnname = cnname;
                 ajaxobj.enname = enname;
                 ajaxobj.sex = sex;
+                ajaxobj.phone = phone;
+                ajaxobj.email = email;
                 ajaxobj.id = modifyid;
-                ajaxobj.modify();
+                ajaxobj.modify(ajaxobj,response);
 
                 e.preventDefault(); // avoid to execute the actual submit of the form.
             },
@@ -210,7 +237,7 @@ function initEdit(response) {
         error: function (exception) {
             alert('Exeption:' + exception);
         }
-    });
+    }); 
 }
 
 /**
@@ -246,14 +273,22 @@ AjaxObject.prototype.add = function (res,arr=[]) {
     // refreshTable(JSON.parse(response));
     $("#dialog-addconfirm").dialog("close");
 }
-AjaxObject.prototype.modify = function () {
-    response = '[{"s_sn":"49","cnname":"蔡凡昕","enname":"Allen","sex":"0","phone":"0912345678","email":"abc@abc.com"}]';
-    refreshTable(JSON.parse(response));
+AjaxObject.prototype.modify = function (obj,arr,ARR=[]) {
+    // response = '[{"s_sn":"49","cnname":"蔡凡昕","enname":"Allen","sex":"0","phone":"0912345678","email":"abc@abc.com"}]';
+    // refreshTable(JSON.parse(response));
+    // refreshTable(obj);
+    // console.log(ARR);
+    arr[0].innerText= obj.cnname;
+    arr[1].innerText=obj.enname;
+    arr[2].innerText=obj.sex;
+    arr[5].innerText=obj.phone;
+    arr[6].innerText=obj.email;
     $("#dialog-modifyconfirm").dialog("close");
 }
-AjaxObject.prototype.modify_get = function () {
-    response = '[{"s_sn":"35","cnname":"邱小甘","enname":"Peter","sex":"0","phone":"0912345678","email":"abc@abc.com"},{"s_sn":"49","cnname":"蔡凡昕","enname":"Allen","sex":"0","phone":"0912345678","email":"abc@abc.com"},{"s_sn":"50","cnname":"趙雪瑜","enname":"Sharon","sex":"0","phone":"0912345678","email":"abc@abc.com"},{"s_sn":"51","cnname":"賴佳蓉","enname":"Yoki","sex":"1","phone":"0912345678","email":"abc@abc.com"}]';
-    initEdit(JSON.parse(response));
+AjaxObject.prototype.modify_get = function (obj) {
+    // response = '[{"s_sn":"35","cnname":"邱小甘3","enname":"Peter","sex":"0","phone":"0912345678","email":"abc@abc.com"},{"s_sn":"49","cnname":"蔡凡昕","enname":"Allen","sex":"0","phone":"0912345678","email":"abc@abc.com"},{"s_sn":"50","cnname":"趙雪瑜","enname":"Sharon","sex":"0","phone":"0912345678","email":"abc@abc.com"},{"s_sn":"51","cnname":"賴佳蓉","enname":"Yoki","sex":"1","phone":"0912345678","email":"abc@abc.com"}]';
+    // initEdit(JSON.parse(response));
+    initEdit(Array.from(obj.children));
 }
 AjaxObject.prototype.search = function () {
     response = '[{"s_sn":"35","cnname":"邱小甘","enname":"Peter","sex":"0","phone":"0912345678","email":"abc@abc.com"}]';
@@ -261,8 +296,9 @@ AjaxObject.prototype.search = function () {
     $("#dialog-searchconfirm").dialog("close");
 }
 AjaxObject.prototype.delete = function () {
-    response = '[{"s_sn":"35","cnname":"邱小甘","enname":"Peter","sex":"0","phone":"0912345678","email":"abc@abc.com"},{"s_sn":"49","cnname":"蔡凡昕","enname":"Allen","sex":"0","phone":"0912345678","email":"abc@abc.com"}]';
-    refreshTable(JSON.parse(response));
+    // response = '[{"s_sn":"35","cnname":"邱小甘","enname":"Peter","sex":"0","phone":"0912345678","email":"abc@abc.com"},{"s_sn":"49","cnname":"蔡凡昕","enname":"Allen","sex":"0","phone":"0912345678","email":"abc@abc.com"}]';
+    // refreshTable(JSON.parse(response));
+    //refreshTable("");
 }
 
 // hover十字

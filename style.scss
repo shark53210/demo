@@ -46,6 +46,9 @@ body{
                     background-color: orange !important;
                 }
                 tr{
+                    td#clickPhone{
+                        cursor: pointer;
+                    }
                     td{
                         border-width: 1px;
                         padding: 5px;
