@@ -27,9 +27,8 @@ body div.titleButton div.button {
 
 body div.titleButton div.button button {
   background-color: #FFB319;
-  width: 80px;
-  height: 40px;
-  font-size: 20px;
+  width: 60px;
+  height: 30px;
   border-radius: 10px;
 }
 
